@@ -3,7 +3,7 @@
  * @since 2019-11-01 20:44:29
  */
 import loadable from '@loadable/component';
-export const DefaultLoadable = loadable({
+export const LazyFoo = loadable({
   chunkName() {
     return 'input-AsyncDefaultComponent';
   },
@@ -19,15 +19,6 @@ export const DefaultLoadable = loadable({
   requireAsync: () =>
     import(
       /* webpackChunkName: "input-AsyncDefaultComponent" */
-
-      /* comment */
-
-      /* comment 2 */
-
-      /** comment 3 */
-      /// comment 5
-
-      /* comment 4 */
       './input/AsyncDefaultComponent'
     ),
 
