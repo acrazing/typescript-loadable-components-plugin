@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "rootDir": "./compare",
+    "outDir": "./compare",
+    "target": "esnext",
+    "module": "esnext",
+    "importHelpers": true,
+    "allowJs": false,
+    "jsx": "react",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "plugins": [
+      {
+        "transform": "./lib"
+      }
+    ]
+  },
+  "include": ["./compare/**/*.ts", "./compare/**/*.tsx"],
+  "exclude": []
+}
