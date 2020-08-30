@@ -5,48 +5,78 @@
 
 import * as ts from 'typescript';
 
-const REQUIRE_SYNC_BODY = ts.createReturn(
-  ts.createConditional(
-    ts.createBinary(
-      ts.createTypeOf(ts.createLiteral('__webpack_require__')),
-      ts.SyntaxKind.ExclamationEqualsEqualsToken,
-      ts.createStringLiteral('undefined'),
-    ),
-    ts.createToken(ts.SyntaxKind.QuestionToken),
-    ts.createCall(ts.createIdentifier('__webpack_require__'), void 0, [
-      ts.createCall(
-        ts.createPropertyAccess(ts.createThis(), 'resolve'),
-        void 0,
-        [ts.createIdentifier('props')],
+const REQUIRE_SYNC_BODY = ts.factory.createReturnStatement(
+  ts.factory.createConditionalExpression(
+    ts.factory.createBinaryExpression(
+      ts.factory.createTypeOfExpression(
+        ts.factory.createStringLiteral('__webpack_require__'),
       ),
-    ]),
-    ts.createToken(ts.SyntaxKind.ColonToken),
-    ts.createCall(
-      ts.createCall(ts.createIdentifier('eval'), void 0, [
-        ts.createStringLiteral('module.require'),
-      ]),
+      ts.SyntaxKind.ExclamationEqualsEqualsToken,
+      ts.factory.createStringLiteral('undefined'),
+    ),
+    ts.factory.createToken(ts.SyntaxKind.QuestionToken),
+    ts.factory.createCallChain(
+      ts.factory.createIdentifier('__webpack_require__'),
+      void 0,
       void 0,
       [
-        ts.createCall(
-          ts.createPropertyAccess(ts.createThis(), 'resolve'),
+        ts.factory.createCallChain(
+          ts.factory.createPropertyAccessChain(
+            ts.factory.createThis(),
+            void 0,
+            'resolve',
+          ),
           void 0,
-          [ts.createIdentifier('props')],
+          void 0,
+          [ts.factory.createIdentifier('props')],
+        ),
+      ],
+    ),
+    ts.factory.createToken(ts.SyntaxKind.ColonToken),
+    ts.factory.createCallChain(
+      ts.factory.createCallChain(
+        ts.factory.createIdentifier('eval'),
+        void 0,
+        void 0,
+        [ts.factory.createStringLiteral('module.require')],
+      ),
+      void 0,
+      void 0,
+      [
+        ts.factory.createCallChain(
+          ts.factory.createPropertyAccessChain(
+            ts.factory.createThis(),
+            void 0,
+            'resolve',
+          ),
+          void 0,
+          void 0,
+          [ts.factory.createIdentifier('props')],
         ),
       ],
     ),
   ),
 );
 
-const REQUIRE_SYNC_PROPERTY = ts.createMethod(
+const REQUIRE_SYNC_PROPERTY = ts.factory.createMethodDeclaration(
   void 0,
   void 0,
   void 0,
   'requireSync',
   void 0,
   void 0,
-  [ts.createParameter(void 0, void 0, void 0, 'props', void 0, void 0)],
+  [
+    ts.factory.createParameterDeclaration(
+      void 0,
+      void 0,
+      void 0,
+      'props',
+      void 0,
+      void 0,
+    ),
+  ],
   void 0,
-  ts.createBlock([REQUIRE_SYNC_BODY]),
+  ts.factory.createBlock([REQUIRE_SYNC_BODY]),
 );
 
 export function createRequireSync(): ts.ObjectLiteralElementLike {

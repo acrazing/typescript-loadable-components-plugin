@@ -15,7 +15,7 @@ export const LazyFoo = loadable({
   },
   requireAsync: () =>
     import(
-      /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent'
+      /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent'
     ),
   requireSync(props) {
     return typeof '__webpack_require__' !== 'undefined'
@@ -25,11 +25,11 @@ export const LazyFoo = loadable({
   resolve() {
     if (require.resolveWeak)
       return require.resolveWeak(
-        /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
+        /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
       );
     else
       return eval('require.resolve')(
-        /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
+        /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
       );
   },
 });
@@ -45,7 +45,7 @@ export const DefaultLib = loadable.lib({
   },
   requireAsync: () =>
     import(
-      /* "webpackChunkName":"input-AsyncComponent" */ './input/AsyncComponent'
+      /* webpackChunkName: "input-AsyncComponent" */ './input/AsyncComponent'
     ),
   requireSync(props) {
     return typeof '__webpack_require__' !== 'undefined'
@@ -55,11 +55,11 @@ export const DefaultLib = loadable.lib({
   resolve() {
     if (require.resolveWeak)
       return require.resolveWeak(
-        /* "webpackChunkName":"input-AsyncComponent" */ './input/AsyncComponent',
+        /* webpackChunkName: "input-AsyncComponent" */ './input/AsyncComponent',
       );
     else
       return eval('require.resolve')(
-        /* "webpackChunkName":"input-AsyncComponent" */ './input/AsyncComponent',
+        /* webpackChunkName: "input-AsyncComponent" */ './input/AsyncComponent',
       );
   },
 });
@@ -76,7 +76,7 @@ export const WithOptionsLoadable = loadable(
     },
     requireAsync: () =>
       import(
-        /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent'
+        /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent'
       ),
     requireSync(props) {
       return typeof '__webpack_require__' !== 'undefined'
@@ -86,11 +86,11 @@ export const WithOptionsLoadable = loadable(
     resolve() {
       if (require.resolveWeak)
         return require.resolveWeak(
-          /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
+          /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
         );
       else
         return eval('require.resolve')(
-          /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
+          /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
         );
     },
   },
@@ -111,7 +111,7 @@ export const WithOptionsLib = loadable.lib(
     },
     requireAsync: () =>
       import(
-        /* "webpackChunkName":"input-AsyncComponent" */ './input/AsyncComponent'
+        /* webpackChunkName: "input-AsyncComponent" */ './input/AsyncComponent'
       ),
     requireSync(props) {
       return typeof '__webpack_require__' !== 'undefined'
@@ -121,11 +121,11 @@ export const WithOptionsLib = loadable.lib(
     resolve() {
       if (require.resolveWeak)
         return require.resolveWeak(
-          /* "webpackChunkName":"input-AsyncComponent" */ './input/AsyncComponent',
+          /* webpackChunkName: "input-AsyncComponent" */ './input/AsyncComponent',
         );
       else
         return eval('require.resolve')(
-          /* "webpackChunkName":"input-AsyncComponent" */ './input/AsyncComponent',
+          /* webpackChunkName: "input-AsyncComponent" */ './input/AsyncComponent',
         );
     },
   },
@@ -146,7 +146,7 @@ export const NonSsrLoadable = loadable(
     },
     requireAsync: () =>
       import(
-        /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent'
+        /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent'
       ),
     requireSync(props) {
       return typeof '__webpack_require__' !== 'undefined'
@@ -156,11 +156,11 @@ export const NonSsrLoadable = loadable(
     resolve() {
       if (require.resolveWeak)
         return require.resolveWeak(
-          /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
+          /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
         );
       else
         return eval('require.resolve')(
-          /* "webpackChunkName":"input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
+          /* webpackChunkName: "input-AsyncDefaultComponent" */ './input/AsyncDefaultComponent',
         );
     },
   },
@@ -180,9 +180,7 @@ export const DynamicLoadable = loadable(
       );
     },
     requireAsync: (props) =>
-      import(
-        /* "webpackChunkName":"input-[request]" */ `./input/${props.page}`
-      ),
+      import(/* webpackChunkName: "input-[request]" */ `./input/${props.page}`),
     requireSync(props) {
       return typeof '__webpack_require__' !== 'undefined'
         ? __webpack_require__(this.resolve(props))
@@ -191,11 +189,11 @@ export const DynamicLoadable = loadable(
     resolve(props) {
       if (require.resolveWeak)
         return require.resolveWeak(
-          /* "webpackChunkName":"input-[request]" */ `./input/${props.page}`,
+          /* webpackChunkName: "input-[request]" */ `./input/${props.page}`,
         );
       else
         return eval('require.resolve')(
-          /* "webpackChunkName":"input-[request]" */ `./input/${props.page}`,
+          /* webpackChunkName: "input-[request]" */ `./input/${props.page}`,
         );
     },
   },
@@ -215,9 +213,7 @@ export const DynamicLib = loadable.lib(
       );
     },
     requireAsync: (props) =>
-      import(
-        /* "webpackChunkName":"input-[request]" */ `./input/${props.page}`
-      ),
+      import(/* webpackChunkName: "input-[request]" */ `./input/${props.page}`),
     requireSync(props) {
       return typeof '__webpack_require__' !== 'undefined'
         ? __webpack_require__(this.resolve(props))
@@ -226,11 +222,11 @@ export const DynamicLib = loadable.lib(
     resolve(props) {
       if (require.resolveWeak)
         return require.resolveWeak(
-          /* "webpackChunkName":"input-[request]" */ `./input/${props.page}`,
+          /* webpackChunkName: "input-[request]" */ `./input/${props.page}`,
         );
       else
         return eval('require.resolve')(
-          /* "webpackChunkName":"input-[request]" */ `./input/${props.page}`,
+          /* webpackChunkName: "input-[request]" */ `./input/${props.page}`,
         );
     },
   },

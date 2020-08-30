@@ -27,21 +27,3 @@ export function getImportCallList(body: ts.ConciseBody): ts.CallExpression[] {
   visitor(body);
   return imports;
 }
-
-export function createStatements(text: string) {
-  const { statements } = ts.createSourceFile(
-    '',
-    text,
-    ts.ScriptTarget.ESNext,
-    false,
-    ts.ScriptKind.JS,
-  );
-  const visitor = (node: ts.Node) => {
-    node.pos = -1;
-    node.end = -1;
-    node.flags = ts.NodeFlags.Synthesized;
-    ts.forEachChild(node, visitor);
-  };
-  statements.forEach(visitor);
-  return statements;
-}

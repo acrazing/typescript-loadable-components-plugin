@@ -12,7 +12,7 @@ export function createResolve(
   loader: ts.FunctionExpression | ts.ArrowFunction,
 ): ts.ObjectLiteralElementLike {
   const requestNode = target.arguments[0];
-  return ts.createMethod(
+  return ts.factory.createMethodDeclaration(
     void 0,
     void 0,
     void 0,
@@ -21,24 +21,34 @@ export function createResolve(
     void 0,
     loader.parameters,
     void 0,
-    ts.createBlock([
-      ts.createIf(
-        ts.createPropertyAccess(ts.createIdentifier('require'), 'resolveWeak'),
-        ts.createReturn(
-          ts.createCall(
-            ts.createPropertyAccess(
-              ts.createIdentifier('require'),
+    ts.factory.createBlock([
+      ts.factory.createIfStatement(
+        ts.factory.createPropertyAccessChain(
+          ts.factory.createIdentifier('require'),
+          void 0,
+          'resolveWeak',
+        ),
+        ts.factory.createReturnStatement(
+          ts.factory.createCallChain(
+            ts.factory.createPropertyAccessChain(
+              ts.factory.createIdentifier('require'),
+              void 0,
               'resolveWeak',
             ),
+            void 0,
             void 0,
             [requestNode],
           ),
         ),
-        ts.createReturn(
-          ts.createCall(
-            ts.createCall(ts.createIdentifier('eval'), void 0, [
-              ts.createStringLiteral('require.resolve'),
-            ]),
+        ts.factory.createReturnStatement(
+          ts.factory.createCallChain(
+            ts.factory.createCallChain(
+              ts.factory.createIdentifier('eval'),
+              void 0,
+              void 0,
+              [ts.factory.createStringLiteral('require.resolve')],
+            ),
+            void 0,
             void 0,
             [requestNode],
           ),

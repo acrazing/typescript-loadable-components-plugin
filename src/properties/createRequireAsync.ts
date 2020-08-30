@@ -11,5 +11,5 @@ export function createRequireAsync(
   target: ts.CallExpression,
   loader: ts.FunctionExpression | ts.ArrowFunction,
 ): ts.ObjectLiteralElementLike {
-  return ts.createPropertyAssignment('requireAsync', loader);
+  return ts.factory.createPropertyAssignment('requireAsync', loader);
 }

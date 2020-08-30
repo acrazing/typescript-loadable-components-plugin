@@ -4,23 +4,40 @@
  */
 import loadable from '@loadable/component';
 export const LazyFoo = loadable({
+  resolved: {},
+
   chunkName() {
     return 'input-AsyncDefaultComponent';
   },
 
   isReady(props) {
+    const key = this.resolve(props);
+
+    if (this.resolved[key] !== true) {
+      return false;
+    }
+
     if (typeof __webpack_modules__ !== 'undefined') {
-      return !!__webpack_modules__[this.resolve(props)];
+      return !!__webpack_modules__[key];
     }
 
     return false;
   },
 
-  requireAsync: () =>
+  importAsync: () =>
     import(
       /* webpackChunkName: "input-AsyncDefaultComponent" */
       './input/AsyncDefaultComponent'
     ),
+
+  requireAsync(props) {
+    const key = this.resolve(props);
+    this.resolved[key] = false;
+    return this.importAsync(props).then((resolved) => {
+      this.resolved[key] = true;
+      return resolved;
+    });
+  },
 
   requireSync(props) {
     const id = this.resolve(props);
@@ -41,23 +58,40 @@ export const LazyFoo = loadable({
   },
 });
 export const DefaultLib = loadable.lib({
+  resolved: {},
+
   chunkName() {
     return 'input-AsyncComponent';
   },
 
   isReady(props) {
+    const key = this.resolve(props);
+
+    if (this.resolved[key] !== true) {
+      return false;
+    }
+
     if (typeof __webpack_modules__ !== 'undefined') {
-      return !!__webpack_modules__[this.resolve(props)];
+      return !!__webpack_modules__[key];
     }
 
     return false;
   },
 
-  requireAsync: () =>
+  importAsync: () =>
     import(
       /* webpackChunkName: "input-AsyncComponent" */
       './input/AsyncComponent'
     ),
+
+  requireAsync(props) {
+    const key = this.resolve(props);
+    this.resolved[key] = false;
+    return this.importAsync(props).then((resolved) => {
+      this.resolved[key] = true;
+      return resolved;
+    });
+  },
 
   requireSync(props) {
     const id = this.resolve(props);
@@ -79,23 +113,40 @@ export const DefaultLib = loadable.lib({
 });
 export const WithOptionsLoadable = loadable(
   {
+    resolved: {},
+
     chunkName() {
       return 'input-AsyncDefaultComponent';
     },
 
     isReady(props) {
+      const key = this.resolve(props);
+
+      if (this.resolved[key] !== true) {
+        return false;
+      }
+
       if (typeof __webpack_modules__ !== 'undefined') {
-        return !!__webpack_modules__[this.resolve(props)];
+        return !!__webpack_modules__[key];
       }
 
       return false;
     },
 
-    requireAsync: () =>
+    importAsync: () =>
       import(
         /* webpackChunkName: "input-AsyncDefaultComponent" */
         './input/AsyncDefaultComponent'
       ),
+
+    requireAsync(props) {
+      const key = this.resolve(props);
+      this.resolved[key] = false;
+      return this.importAsync(props).then((resolved) => {
+        this.resolved[key] = true;
+        return resolved;
+      });
+    },
 
     requireSync(props) {
       const id = this.resolve(props);
@@ -121,23 +172,40 @@ export const WithOptionsLoadable = loadable(
 );
 export const WithOptionsLib = loadable.lib(
   {
+    resolved: {},
+
     chunkName() {
       return 'input-AsyncComponent';
     },
 
     isReady(props) {
+      const key = this.resolve(props);
+
+      if (this.resolved[key] !== true) {
+        return false;
+      }
+
       if (typeof __webpack_modules__ !== 'undefined') {
-        return !!__webpack_modules__[this.resolve(props)];
+        return !!__webpack_modules__[key];
       }
 
       return false;
     },
 
-    requireAsync: () =>
+    importAsync: () =>
       import(
         /* webpackChunkName: "input-AsyncComponent" */
         './input/AsyncComponent'
       ),
+
+    requireAsync(props) {
+      const key = this.resolve(props);
+      this.resolved[key] = false;
+      return this.importAsync(props).then((resolved) => {
+        this.resolved[key] = true;
+        return resolved;
+      });
+    },
 
     requireSync(props) {
       const id = this.resolve(props);
@@ -163,23 +231,40 @@ export const WithOptionsLib = loadable.lib(
 );
 export const NonSsrLoadable = loadable(
   {
+    resolved: {},
+
     chunkName() {
       return 'input-AsyncDefaultComponent';
     },
 
     isReady(props) {
+      const key = this.resolve(props);
+
+      if (this.resolved[key] !== true) {
+        return false;
+      }
+
       if (typeof __webpack_modules__ !== 'undefined') {
-        return !!__webpack_modules__[this.resolve(props)];
+        return !!__webpack_modules__[key];
       }
 
       return false;
     },
 
-    requireAsync: () =>
+    importAsync: () =>
       import(
         /* webpackChunkName: "input-AsyncDefaultComponent" */
         './input/AsyncDefaultComponent'
       ),
+
+    requireAsync(props) {
+      const key = this.resolve(props);
+      this.resolved[key] = false;
+      return this.importAsync(props).then((resolved) => {
+        this.resolved[key] = true;
+        return resolved;
+      });
+    },
 
     requireSync(props) {
       const id = this.resolve(props);
@@ -205,23 +290,40 @@ export const NonSsrLoadable = loadable(
 );
 export const DynamicLoadable = loadable(
   {
+    resolved: {},
+
     chunkName(props) {
       return `input-${props.page}`.replace(/[^a-zA-Z0-9_!§$()=\-^°]+/g, '-');
     },
 
     isReady(props) {
+      const key = this.resolve(props);
+
+      if (this.resolved[key] !== true) {
+        return false;
+      }
+
       if (typeof __webpack_modules__ !== 'undefined') {
-        return !!__webpack_modules__[this.resolve(props)];
+        return !!__webpack_modules__[key];
       }
 
       return false;
     },
 
-    requireAsync: (props) =>
+    importAsync: (props) =>
       import(
         /* webpackChunkName: "input-[request]" */
         `./input/${props.page}`
       ),
+
+    requireAsync(props) {
+      const key = this.resolve(props);
+      this.resolved[key] = false;
+      return this.importAsync(props).then((resolved) => {
+        this.resolved[key] = true;
+        return resolved;
+      });
+    },
 
     requireSync(props) {
       const id = this.resolve(props);
@@ -247,23 +349,40 @@ export const DynamicLoadable = loadable(
 );
 export const DynamicLib = loadable.lib(
   {
+    resolved: {},
+
     chunkName(props) {
       return `input-${props.page}`.replace(/[^a-zA-Z0-9_!§$()=\-^°]+/g, '-');
     },
 
     isReady(props) {
+      const key = this.resolve(props);
+
+      if (this.resolved[key] !== true) {
+        return false;
+      }
+
       if (typeof __webpack_modules__ !== 'undefined') {
-        return !!__webpack_modules__[this.resolve(props)];
+        return !!__webpack_modules__[key];
       }
 
       return false;
     },
 
-    requireAsync: (props) =>
+    importAsync: (props) =>
       import(
         /* webpackChunkName: "input-[request]" */
         `./input/${props.page}`
       ),
+
+    requireAsync(props) {
+      const key = this.resolve(props);
+      this.resolved[key] = false;
+      return this.importAsync(props).then((resolved) => {
+        this.resolved[key] = true;
+        return resolved;
+      });
+    },
 
     requireSync(props) {
       const id = this.resolve(props);

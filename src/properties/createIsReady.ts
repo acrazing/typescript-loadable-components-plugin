@@ -5,40 +5,50 @@
 
 import * as ts from 'typescript';
 
-const IS_READY_BODY = ts.createReturn(
-  ts.createBinary(
-    ts.createBinary(
-      ts.createTypeOf(ts.createIdentifier('__webpack_modules__')),
+const IS_READY_BODY = ts.factory.createReturnStatement(
+  ts.factory.createBinaryExpression(
+    ts.factory.createBinaryExpression(
+      ts.factory.createTypeOfExpression(
+        ts.factory.createIdentifier('__webpack_modules__'),
+      ),
       ts.SyntaxKind.ExclamationEqualsEqualsToken,
-      ts.createStringLiteral('undefined'),
+      ts.factory.createStringLiteral('undefined'),
     ),
     ts.SyntaxKind.AmpersandAmpersandToken,
-    ts.createCall(ts.createIdentifier('Boolean'), void 0, [
-      ts.createElementAccess(
-        ts.createIdentifier('__webpack_modules__'),
-        ts.createCall(
-          ts.createPropertyAccess(
-            ts.createThis(),
-            ts.createIdentifier('resolve'),
-          ),
+    ts.factory.createCallChain(
+      ts.factory.createIdentifier('Boolean'),
+      void 0,
+      void 0,
+      [
+        ts.factory.createElementAccessChain(
+          ts.factory.createIdentifier('__webpack_modules__'),
           void 0,
-          [ts.createIdentifier('props')],
+          ts.factory.createCallChain(
+            ts.factory.createPropertyAccessChain(
+              ts.factory.createThis(),
+              void 0,
+              ts.factory.createIdentifier('resolve'),
+            ),
+            void 0,
+            void 0,
+            [ts.factory.createIdentifier('props')],
+          ),
         ),
-      ),
-    ]),
+      ],
+    ),
   ),
 );
 
-const IS_READY_PROPERTY = ts.createMethod(
+const IS_READY_PROPERTY = ts.factory.createMethodDeclaration(
   void 0,
   void 0,
   void 0,
   'isReady',
   void 0,
   void 0,
-  [ts.createParameter(void 0, void 0, void 0, 'props')],
+  [ts.factory.createParameterDeclaration(void 0, void 0, void 0, 'props')],
   void 0,
-  ts.createBlock([IS_READY_BODY]),
+  ts.factory.createBlock([IS_READY_BODY]),
 );
 
 export function createIsReady() {

@@ -73,8 +73,13 @@ function replaceWebpackComment(
   };
   ts.visitEachChild(request, visitor, state.context);
   ts.setTextRange(request, { pos: request.getStart(), end: request.getEnd() });
-  let webpackComment = JSON.stringify(commentsState.webpack);
-  webpackComment = webpackComment.substr(1, webpackComment.length - 2);
+  const webpackComment = (Object.keys(commentsState.webpack) as Array<
+    keyof WebpackComment
+  >)
+    .map((p) => {
+      return p + ': ' + JSON.stringify(commentsState.webpack[p]);
+    })
+    .join(',');
   ts.addSyntheticLeadingComment(
     request,
     ts.SyntaxKind.MultiLineCommentTrivia,
@@ -105,36 +110,38 @@ export function createChunkName(
     leadingComments.webpack.webpackChunkName
   ) {
     webpackChunkName = leadingComments.webpack.webpackChunkName;
-    chunkNameNode = ts.createStringLiteral(webpackChunkName);
+    chunkNameNode = ts.factory.createStringLiteral(webpackChunkName);
   } else if (ts.isTemplateExpression(requestNode)) {
     webpackChunkName = requestNode.head.text
       .replace(WEBPACK_PATH_NAME_NORMALIZE_REPLACE_REGEX, '-')
       .replace(MATCH_LEFT_HYPHENS_REPLACE_REGEX, '');
-    chunkNameNode = ts.createCall(
-      ts.createPropertyAccess(
-        ts.createTemplateExpression(
-          ts.createTemplateHead(webpackChunkName),
+    chunkNameNode = ts.factory.createCallChain(
+      ts.factory.createPropertyAccessChain(
+        ts.factory.createTemplateExpression(
+          ts.factory.createTemplateHead(webpackChunkName),
           requestNode.templateSpans.map((span, index) => {
             const text = span.literal.text.replace(
               WEBPACK_PATH_NAME_NORMALIZE_REPLACE_REGEX,
               '-',
             );
-            return ts.createTemplateSpan(
+            return ts.factory.createTemplateSpan(
               span.expression,
               index === requestNode.templateSpans.length - 1
-                ? ts.createTemplateTail(text)
-                : ts.createTemplateMiddle(text),
+                ? ts.factory.createTemplateTail(text)
+                : ts.factory.createTemplateMiddle(text),
             );
           }),
         ),
+        void 0,
         'replace',
       ),
       void 0,
+      void 0,
       [
-        ts.createRegularExpressionLiteral(
+        ts.factory.createRegularExpressionLiteral(
           `/${WEBPACK_PATH_NAME_NORMALIZE_REPLACE_REGEX.source}/g`,
         ),
-        ts.createStringLiteral('-'),
+        ts.factory.createStringLiteral('-'),
       ],
     );
     webpackChunkName += '[request]';
@@ -146,7 +153,7 @@ export function createChunkName(
       .replace(JS_PATH_REGEXP, '')
       .replace(WEBPACK_PATH_NAME_NORMALIZE_REPLACE_REGEX, '-')
       .replace(WEBPACK_MATCH_PADDED_HYPHENS_REPLACE_REGEX, '');
-    chunkNameNode = ts.createStringLiteral(webpackChunkName);
+    chunkNameNode = ts.factory.createStringLiteral(webpackChunkName);
   } else {
     throw new Error(`unexpected import argument kind: ${requestNode}`);
   }
@@ -155,7 +162,7 @@ export function createChunkName(
     replaceWebpackComment(state, requestNode, leadingComments);
   }
 
-  return ts.createMethod(
+  return ts.factory.createMethodDeclaration(
     void 0,
     void 0,
     void 0,
@@ -164,6 +171,6 @@ export function createChunkName(
     void 0,
     loader.parameters,
     void 0,
-    ts.createBlock([ts.createReturn(chunkNameNode)]),
+    ts.factory.createBlock([ts.factory.createReturnStatement(chunkNameNode)]),
   );
 }

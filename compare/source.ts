@@ -4,6 +4,7 @@
  */
 
 import loadable from '@loadable/component';
+import { ComponentType } from 'react';
 
 export const LazyFoo = loadable(() => import('./input/AsyncDefaultComponent'));
 
@@ -37,7 +38,7 @@ export const DynamicLoadable = loadable<{ page: string }>(
   },
 );
 
-export const DynamicLib = loadable.lib<{ page: string }>(
+export const DynamicLib = loadable.lib<{ page: string }, ComponentType>(
   (props) => import(`./input/${(props as any).page}`),
   {
     cacheKey: (props) => props.page,

@@ -49,11 +49,16 @@ function visitLoadableComponents(state: State, node: ts.Node) {
     );
   }
   const args = node.arguments.slice();
-  args[0] = ts.createObjectLiteral(
+  args[0] = ts.factory.createObjectLiteralExpression(
     properties.map((fn) => fn(state, importList[0], loader)),
     true,
   );
-  return ts.createCall(node.expression, node.typeArguments, args);
+  return ts.factory.createCallChain(
+    node.expression,
+    void 0,
+    node.typeArguments,
+    args,
+  );
 }
 
 export function createLoadableComponentsTransformer(
