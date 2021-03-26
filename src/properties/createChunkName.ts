@@ -115,7 +115,7 @@ export function createChunkName(
     webpackChunkName = requestNode.head.text
       .replace(WEBPACK_PATH_NAME_NORMALIZE_REPLACE_REGEX, '-')
       .replace(MATCH_LEFT_HYPHENS_REPLACE_REGEX, '');
-    chunkNameNode = ts.factory.createCallChain(
+    chunkNameNode = ts.factory.createCallExpression(
       ts.factory.createPropertyAccessChain(
         ts.factory.createTemplateExpression(
           ts.factory.createTemplateHead(webpackChunkName),
@@ -135,7 +135,6 @@ export function createChunkName(
         void 0,
         'replace',
       ),
-      void 0,
       void 0,
       [
         ts.factory.createRegularExpressionLiteral(

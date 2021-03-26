@@ -15,21 +15,17 @@ const IS_READY_BODY = ts.factory.createReturnStatement(
       ts.factory.createStringLiteral('undefined'),
     ),
     ts.SyntaxKind.AmpersandAmpersandToken,
-    ts.factory.createCallChain(
+    ts.factory.createCallExpression(
       ts.factory.createIdentifier('Boolean'),
       void 0,
-      void 0,
       [
-        ts.factory.createElementAccessChain(
+        ts.factory.createElementAccessExpression(
           ts.factory.createIdentifier('__webpack_modules__'),
-          void 0,
-          ts.factory.createCallChain(
-            ts.factory.createPropertyAccessChain(
+          ts.factory.createCallExpression(
+            ts.factory.createPropertyAccessExpression(
               ts.factory.createThis(),
-              void 0,
               ts.factory.createIdentifier('resolve'),
             ),
-            void 0,
             void 0,
             [ts.factory.createIdentifier('props')],
           ),
