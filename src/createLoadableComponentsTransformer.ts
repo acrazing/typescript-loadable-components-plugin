@@ -53,12 +53,7 @@ function visitLoadableComponents(state: State, node: ts.Node) {
     properties.map((fn) => fn(state, importList[0], loader)),
     true,
   );
-  return ts.factory.createCallChain(
-    node.expression,
-    void 0,
-    node.typeArguments,
-    args,
-  );
+  return ts.factory.createCallExpression(node.expression, void 0, args);
 }
 
 export function createLoadableComponentsTransformer(

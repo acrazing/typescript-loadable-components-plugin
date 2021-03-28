@@ -23,32 +23,27 @@ export function createResolve(
     void 0,
     ts.factory.createBlock([
       ts.factory.createIfStatement(
-        ts.factory.createPropertyAccessChain(
+        ts.factory.createPropertyAccessExpression(
           ts.factory.createIdentifier('require'),
-          void 0,
           'resolveWeak',
         ),
         ts.factory.createReturnStatement(
-          ts.factory.createCallChain(
-            ts.factory.createPropertyAccessChain(
+          ts.factory.createCallExpression(
+            ts.factory.createPropertyAccessExpression(
               ts.factory.createIdentifier('require'),
-              void 0,
               'resolveWeak',
             ),
-            void 0,
             void 0,
             [requestNode],
           ),
         ),
         ts.factory.createReturnStatement(
-          ts.factory.createCallChain(
-            ts.factory.createCallChain(
+          ts.factory.createCallExpression(
+            ts.factory.createCallExpression(
               ts.factory.createIdentifier('eval'),
-              void 0,
               void 0,
               [ts.factory.createStringLiteral('require.resolve')],
             ),
-            void 0,
             void 0,
             [requestNode],
           ),

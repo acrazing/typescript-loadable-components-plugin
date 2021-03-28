@@ -15,41 +15,34 @@ const REQUIRE_SYNC_BODY = ts.factory.createReturnStatement(
       ts.factory.createStringLiteral('undefined'),
     ),
     ts.factory.createToken(ts.SyntaxKind.QuestionToken),
-    ts.factory.createCallChain(
+    ts.factory.createCallExpression(
       ts.factory.createIdentifier('__webpack_require__'),
       void 0,
-      void 0,
       [
-        ts.factory.createCallChain(
-          ts.factory.createPropertyAccessChain(
+        ts.factory.createCallExpression(
+          ts.factory.createPropertyAccessExpression(
             ts.factory.createThis(),
-            void 0,
             'resolve',
           ),
-          void 0,
           void 0,
           [ts.factory.createIdentifier('props')],
         ),
       ],
     ),
     ts.factory.createToken(ts.SyntaxKind.ColonToken),
-    ts.factory.createCallChain(
-      ts.factory.createCallChain(
+    ts.factory.createCallExpression(
+      ts.factory.createCallExpression(
         ts.factory.createIdentifier('eval'),
-        void 0,
         void 0,
         [ts.factory.createStringLiteral('module.require')],
       ),
       void 0,
-      void 0,
       [
-        ts.factory.createCallChain(
-          ts.factory.createPropertyAccessChain(
+        ts.factory.createCallExpression(
+          ts.factory.createPropertyAccessExpression(
             ts.factory.createThis(),
-            void 0,
             'resolve',
           ),
-          void 0,
           void 0,
           [ts.factory.createIdentifier('props')],
         ),
