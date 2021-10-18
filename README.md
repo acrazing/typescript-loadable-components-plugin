@@ -58,7 +58,7 @@ npm install typescript-loadable-components-plugin -D
 
 ## Usage
 
-### with `ttypescript`
+### with `typescript`
 
 you just need add `typescript--plugin` to your `tsconfig.json`:
 
