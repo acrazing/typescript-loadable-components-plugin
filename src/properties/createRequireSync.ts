@@ -9,7 +9,7 @@ const REQUIRE_SYNC_BODY = ts.factory.createReturnStatement(
   ts.factory.createConditionalExpression(
     ts.factory.createBinaryExpression(
       ts.factory.createTypeOfExpression(
-        ts.factory.createStringLiteral('__webpack_require__'),
+        ts.factory.createIdentifier('__webpack_require__'),
       ),
       ts.SyntaxKind.ExclamationEqualsEqualsToken,
       ts.factory.createStringLiteral('undefined'),

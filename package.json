@@ -38,6 +38,7 @@
     "build:esm:rename:map": "find ./lib -type f -name '*.js.map' | sed -E 's/^(.+)\\.js\\.map$/\\1/' | xargs -I % mv %.js.map %.mjs.map",
     "clean": "rm -rf cjs esm lib build temp .cache",
     "prepublishOnly": "run-s test build",
+    "prepare": "run-s build",
     "start": "npm run clean && npm run build:esm -- --watch",
     "test": "jest",
     "compare:babel": "babel -o ./compare/output_babel.js ./compare/source.ts",
